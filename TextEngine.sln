@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextEngine", "TextEngine\TextEngine.csproj", "{31267248-4E2A-4DC2-929F-167D2FCC36BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis", "Artemis_XNA_INDEPENDENT\Artemis.csproj", "{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31267248-4E2A-4DC2-929F-167D2FCC36BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31267248-4E2A-4DC2-929F-167D2FCC36BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31267248-4E2A-4DC2-929F-167D2FCC36BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31267248-4E2A-4DC2-929F-167D2FCC36BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4962CBE4-3D7E-4AF3-B91E-4D2783755C25}
+	EndGlobalSection
+EndGlobal
