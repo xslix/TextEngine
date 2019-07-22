@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Artemis;
 
 namespace TextEngine.Components
 {
@@ -11,5 +12,6 @@ namespace TextEngine.Components
 	public int? PlayerId { get; set; }
 	[ForeignKey("PlayerId")]
 	public PlayerComponent Player { get; set; }
+
 	}
 }
