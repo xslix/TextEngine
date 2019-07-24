@@ -7,5 +7,9 @@ namespace TextEngine.General
 {
 	class Output
 	{
+		public void SendFormatMessage()
+		{
+
+		}
 	}
 }

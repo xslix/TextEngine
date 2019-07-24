@@ -29,8 +29,7 @@ namespace TextEngine.Network
 					JToken requestBody = JToken.Parse(stream.ReadToEnd());
 					Console.WriteLine("Listener: " + requestBody.Value<String>());
 					int playerId = requestBody["player"].Value<int>();
-					string callingMethod = requestBody["command"].Value<string>();
-					InputObject.PlayerInput[playerId][callingMethod].Enqueue(requestBody["body"]); 
+					InputObject.PlayerInput[playerId].Enqueue(requestBody["command"]); 
 				}
 				HttpListenerResponse response = context.Response;
 				string responseStr = "ok";

@@ -7,9 +7,8 @@ using Artemis;
 
 namespace TextEngine.Components
 {
-	public class LocationComponent : IComponent
+	public class LocationComponent : SerializableComponent
 	{
-		[Key] public int Id { get; set; }
-		public Entity ChainedEntity { get; set; }
+		public List<LocationComponent> Roads { get; set; }
 	}
 }

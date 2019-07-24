@@ -6,11 +6,17 @@ using Artemis.Interface;
 
 namespace TextEngine.Components	
 {
-	class TransformComponent : IComponent
+	public class PlacementComponent : SerializableComponent
 	{
-		public int? LocationId { get; set; }
-		[ForeignKey("LocationId")]
+		public enum PlacementStatus
+		{
+			Standing,
+
+		}
+		//public int? LocationId { get; set; }
+	//	[ForeignKey("LocationId")]
 		public LocationComponent Location { get; set; }
+
 
 
 

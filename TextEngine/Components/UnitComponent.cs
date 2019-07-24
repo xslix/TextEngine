@@ -7,9 +7,7 @@ using Artemis;
 
 namespace TextEngine.Components
 {
-	public class UnitComponent : IComponent
+	public class UnitComponent : SerializableComponent
 	{
-		[Key] public int Id { get; set; }
-		public Entity ChainedEntity { get; set; }
 	}
 }

@@ -7,10 +7,11 @@ using Artemis;
 
 namespace TextEngine.Components
 {
-	class OwnerComponent
+	public class OwnerComponent	: SerializableComponent
 	{
-	public int? PlayerId { get; set; }
-	[ForeignKey("PlayerId")]
+
+	//public int? PlayerId { get; set; }
+	//[ForeignKey("PlayerId")]
 	public PlayerComponent Player { get; set; }
 
 	}
