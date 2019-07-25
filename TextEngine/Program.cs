@@ -56,7 +56,7 @@ namespace TextEngine
 				Entity entity = entityWorld.CreateEntity();
 				entity.Refresh();
 				entityWorld.EntityManager.AddedComponentEvent += SetEntityId;
-
+				
 			}
 
 		}

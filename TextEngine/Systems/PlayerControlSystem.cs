@@ -26,11 +26,11 @@ namespace TextEngine.Systems
 			var input = BlackBoard.GetEntry<Input>("Input");
 			var commands = input.PlayerInput[player.Id];
 			JToken command;
-			while ( commands.TryDequeue(out command) )
+			while (commands.TryDequeue(out command))
 			{
 				var type = command["type"].Value<string>();
 				switch (type)
-				{ 
+				{
 					case "Move":
 						ProcessMove(entity, command);
 						break;
@@ -38,7 +38,7 @@ namespace TextEngine.Systems
 						// send type error
 						break;
 				}
-				
+
 				//Process 
 
 			}
@@ -52,25 +52,43 @@ namespace TextEngine.Systems
 			}
 
 			var travel = entity.GetComponent<TravelComponent>();
-			var placement = entity.GetComponent<PlayerComponent>();
-			if (placement == null && travel == null)
+			var placement = entity.GetComponent<PlacementComponent>();
+			if (placement == null)
 			{
 				//send error
 				return;
 			}
 
-			if (travel != null)
+			var lastLocation = travel == null ? placement.Location : travel.Route.Last();
+			LocationComponent newLocation = null;
+			foreach (var road in lastLocation.Roads)
 			{
-				var lastLocation = travel.Route.Last();
-				foreach (var location in lastLocation.Roads)
+				if (road.To.Id != jToken["destination"].Value<int>()) continue;
+				newLocation = road.To;
+				break;
+			}
+
+			if (newLocation == null)
+			{
+				//send error
+				return;
+			}
+			if (travel == null)
+			{
+				travel = new TravelComponent
 				{
-					
-				}
+					Status = TravelComponent.TravelingStatus.Starting,
+					Route = {newLocation}
+				};
+				entity.AddComponent(travel);
 			}
 			else
 			{
-
+				travel.Route.Add(newLocation);
 			}
+			
 		}
+
+
 	}
 }

@@ -4,11 +4,12 @@ using System.Text;
 using Artemis.Interface;
 using System.ComponentModel.DataAnnotations;
 using Artemis;
+using TextEngine.Structures;
 
 namespace TextEngine.Components
 {
 	public class LocationComponent : SerializableComponent
 	{
-		public List<LocationComponent> Roads { get; set; }
+		public List<Road> Roads { get; set; }
 	}
 }
