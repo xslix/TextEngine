@@ -56,19 +56,12 @@ namespace TextEngine
 				Entity entity = entityWorld.CreateEntity();
 				entity.Refresh();
 				entityWorld.EntityManager.AddedComponentEvent += SetEntityId;
+				entityWorld.EntityManager.AddedComponentEvent +=
 				
 			}
 
 		}
 
-		private static void SetEntityId(Entity entity, IComponent component)
-		{
-			if (component is SerializableComponent serializableComponent)
-			{
-				serializableComponent.EntityId = entity.Id;
-				serializableComponent.Entity = entity;
-			}
 
-		}
 	}
 }
