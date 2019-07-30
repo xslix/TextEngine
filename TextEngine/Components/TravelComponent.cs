@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Resources;
 using System.Text;
 using TextEngine.Structures;
 
@@ -21,5 +22,11 @@ namespace TextEngine.Components
 
 		public TravelingStatus Status { get; set; }
 
+		public TravelComponent()
+		{
+			CurrentRoad = null;
+			RemainingTime = 0;
+			Route = new List<LocationComponent>();
+		}
 	}
 }

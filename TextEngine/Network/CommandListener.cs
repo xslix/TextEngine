@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -22,17 +23,29 @@ namespace TextEngine.Network
 			{
 				HttpListenerContext context = listener.GetContext();
 				HttpListenerRequest request = context.Request;
-				
+				HttpListenerResponse response = context.Response;
+				string responseStr = "ok";
+				response.StatusCode = (int) HttpStatusCode.OK;
 				using (StreamReader stream = new StreamReader(
 					request.InputStream, Encoding.UTF8))
 				{
+					try
+					{
 					JToken requestBody = JToken.Parse(stream.ReadToEnd());
-					Console.WriteLine("Listener: " + requestBody.Value<String>());
+					//Console.WriteLine("Listener: " + requestBody.ToString());
 					int playerId = requestBody["player"].Value<int>();
-					InputObject.PlayerInput[playerId].Enqueue(requestBody["command"]); 
+					if (!InputObject.PlayerInput.ContainsKey(playerId))
+						InputObject.PlayerInput.TryAdd(playerId, new ConcurrentQueue<JToken>());
+					InputObject.PlayerInput[playerId].Enqueue(requestBody["command"]);
+
+					}
+					catch (Exception e)
+					{
+						responseStr = "wrong player command format: " + e.ToString();
+						response.StatusCode = (int) HttpStatusCode.BadRequest;
+					}
 				}
-				HttpListenerResponse response = context.Response;
-				string responseStr = "ok";
+
 				byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
 				response.ContentLength64 = buffer.Length;
 				Stream output = response.OutputStream;

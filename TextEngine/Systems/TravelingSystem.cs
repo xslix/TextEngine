@@ -44,7 +44,6 @@ namespace TextEngine.Systems
 						if (road.To != travel.Route[0]) continue;
 						travel.CurrentRoad = road;
 						travel.RemainingTime = road.Duration;
-						travel.Route.RemoveAt(0);
 						placement.Location = null;
 						break;
 					}
@@ -52,15 +51,22 @@ namespace TextEngine.Systems
 					if (travel.CurrentRoad == null)
 					{
 						//send no road
+						Console.WriteLine("no road to next location");
 						travel.Status = TravelComponent.TravelingStatus.Stopping;
+						break;
 					}
 
+					int id = entity.GetComponent<PlayerComponent>().Id;
+					Console.WriteLine("player "+ id + " is starting traveling to location " + travel.CurrentRoad.To.Id.ToString());
 					break;
 				}
 
 				case TravelComponent.TravelingStatus.Stopping:
 				{
 					placement.Location = travel.CurrentRoad.To;
+					int id = entity.GetComponent<PlayerComponent>().Id;
+						Console.WriteLine("player " + id + " is coming to location " + travel.CurrentRoad.To.Id.ToString());
+					travel.Route.RemoveAt(0);
 					if (travel.Route.Count == 0)
 					{
 						entity.RemoveComponent<TravelComponent>();

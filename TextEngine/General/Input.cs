@@ -10,8 +10,12 @@ namespace TextEngine.General
 {
 	public class Input
 	{
-		public Dictionary<int,  ConcurrentQueue <JToken> > PlayerInput;
-		public Dictionary<string, ConcurrentQueue<JToken> > ConsoleInput;
+		public ConcurrentDictionary<int,  ConcurrentQueue <JToken> > PlayerInput;
+		public ConcurrentDictionary<string, ConcurrentQueue<JToken> > ConsoleInput;
 
+		public Input() {
+			PlayerInput = new ConcurrentDictionary<int, ConcurrentQueue<JToken>>();
+			ConsoleInput = new ConcurrentDictionary<string, ConcurrentQueue<JToken>>();
+		}
 	}
 }

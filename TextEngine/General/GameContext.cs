@@ -34,19 +34,20 @@ namespace TextEngine.General
 		{
 			if (component is SerializableComponent serializableComponent)
 			{
-				serializableComponent.EntityId = entity.Id;
+				//serializableComponent.EntityId = entity.Id;
 				serializableComponent.Entity = entity;
+				
 			}
 
 		}
-		public void RemoveComponent(Entity entity, IComponent component)
-		{
-			if (component is SerializableComponent serializableComponent)
-			{
-				serializableComponent.EntityId = entity.Id;
-				serializableComponent.Entity = entity;
-			}
+		//public void RemoveComponent(Entity entity, IComponent component)
+		//{
+		//	if (component is SerializableComponent serializableComponent)
+		//	{
+		//		serializableComponent.EntityId = entity.Id;
+		//		serializableComponent.Entity = entity;
+		//	}
 
-		}
+		//}
 	}
 }

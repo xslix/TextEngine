@@ -14,6 +14,7 @@ namespace TestNetworkController
 
         static void Main(string[] args)
         {
+					Console.WriteLine("Test network controller");
             Thread listen = new Thread(new ThreadStart(Listen));
             listen.Start();
             Thread send = new Thread(new ThreadStart(Send));
@@ -59,7 +60,7 @@ namespace TestNetworkController
             {
                 var command = Console.ReadLine();
                 
-                string site = "http://localhost:3000/controller/";
+                string site = "http://localhost:3000/gamemodel/playerinput/";
 
                 HttpWebRequest req = (HttpWebRequest) HttpWebRequest.Create(site);
                 req.Method = WebRequestMethods.Http.Post;

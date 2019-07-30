@@ -11,5 +11,10 @@ namespace TextEngine.Components
 	public class LocationComponent : SerializableComponent
 	{
 		public List<Road> Roads { get; set; }
+
+		public LocationComponent()
+		{
+			Roads = new List<Road>();
+		}
 	}
 }

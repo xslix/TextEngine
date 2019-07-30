@@ -23,7 +23,6 @@ namespace TextEngine.Systems
 			{
 				float ms = TimeSpan.FromTicks(this.EntityWorld.Delta).Milliseconds;
 				lifeTimeComponent.ReduceLifeTime(ms);
-
 				if (lifeTimeComponent.IsExpired)
 				{
 					entity.Delete();

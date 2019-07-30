@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using TextEngine.General;
 
 namespace TextEngine.Systems 
 {
-	[ArtemisEntitySystem]
+	[ArtemisEntitySystem (GameLoopType = GameLoopType.Update)]
 	public class PlayerControlSystem : EntityProcessingSystem
 	{
 		public PlayerControlSystem() : base(Aspect.One(typeof(PlayerComponent)))
@@ -24,23 +25,32 @@ namespace TextEngine.Systems
 		{
 			var player = entity.GetComponent<PlayerComponent>();
 			var input = BlackBoard.GetEntry<Input>("Input");
-			var commands = input.PlayerInput[player.Id];
-			JToken command;
-			while (commands.TryDequeue(out command))
+		//	if (!input.PlayerInput.ContainsKey(player.Id))
+			//	return;
+			ConcurrentQueue<JToken> commands = null;
+			if (input.PlayerInput.TryGetValue(player.Id, out commands))
 			{
-				var type = command["type"].Value<string>();
-				switch (type)
+				//var commands = input.PlayerInput[player.Id];
+				JToken command;
+				while (commands.TryDequeue(out command))
 				{
-					case "Move":
-						ProcessMove(entity, command);
-						break;
-					default:
-						// send type error
-						break;
+					var type = command["type"].Value<string>();
+					switch (type)
+					{
+						case "move":
+							ProcessMove(entity, command);
+							break;
+						case "move_stop":
+							ProcessMoveStop(entity, command);
+							break;
+						default:
+							// send type error
+							break;
+					}
+
+					//Process 
+
 				}
-
-				//Process 
-
 			}
 		}
 
@@ -56,6 +66,7 @@ namespace TextEngine.Systems
 			if (placement == null)
 			{
 				//send error
+				Console.WriteLine("no placement on player");
 				return;
 			}
 
@@ -71,6 +82,7 @@ namespace TextEngine.Systems
 			if (newLocation == null)
 			{
 				//send error
+				Console.WriteLine("no way to this location");
 				return;
 			}
 			if (travel == null)
@@ -88,6 +100,19 @@ namespace TextEngine.Systems
 			}
 			
 		}
+
+		private void ProcessMoveStop(Entity entity, JToken jToken)
+		{
+			var travel = entity.GetComponent<TravelComponent>();
+			if (travel == null)
+			{
+				//send not traveling
+				return;
+			}
+			if (travel.Route.Count > 1)
+				travel.Route.RemoveRange(1, travel.Route.Count - 1);
+		}
+
 
 
 	}
